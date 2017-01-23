@@ -17,7 +17,7 @@ $ ->
       src: ->
         head = @youtube_ids[0]
         tail = @youtube_ids.slice(1)
-        "http://www.youtube.com/embed/#{head}?playlist=#{tail.join(',')}&#{@options.join('&')}"
+        "https://www.youtube.com/embed/#{head}?playlist=#{tail.join(',')}&#{@options.join('&')}"
     methods:
       submit: ->
         $.ajax
@@ -30,7 +30,6 @@ $ ->
           json = JSON.parse response
           @title       = json.title
           @youtube_ids = json.youtube_ids
-          @playVideo()
         .fail (response) =>
           console.error response
       smallVideoSize: ->
