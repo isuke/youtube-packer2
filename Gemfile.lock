@@ -1,11 +1,22 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    activesupport (5.0.1)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      i18n (~> 0.7)
+      minitest (~> 5.1)
+      tzinfo (~> 1.1)
     backports (3.6.8)
+    concurrent-ruby (1.0.4)
+    i18n (0.7.0)
     mini_portile2 (2.1.0)
+    minitest (5.10.1)
     multi_json (1.12.1)
     nokogiri (1.7.0.1)
       mini_portile2 (~> 2.1.0)
+    oj (2.18.1)
+    rabl (0.13.1)
+      activesupport (>= 2.3.14)
     rack (1.6.5)
     rack-protection (1.5.3)
       rack
@@ -26,13 +37,18 @@ GEM
       temple (~> 0.7.6)
       tilt (>= 1.3.3, < 2.1)
     temple (0.7.7)
+    thread_safe (0.3.5)
     tilt (2.0.5)
+    tzinfo (1.2.2)
+      thread_safe (~> 0.1)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   nokogiri
+  oj
+  rabl
   sinatra (~> 1.4)
   sinatra-contrib
   slim

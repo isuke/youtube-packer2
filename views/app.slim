@@ -1,1 +1,23 @@
-h1 hello world
+doctype html
+html
+  head
+    title YoutubePacker2
+    script[type="text/javascript" src="bundle.js" charset="utf-8"]
+  body
+    #app
+      .serch
+        input[type="url" v-model="url"]
+        button[v-on:click="submit"] submit
+
+      .video
+        h1[v-text="title"]
+        iframe#player[
+          type="text/html"
+          frameborder="0"
+          :width="width"
+          :height="height"
+          :src="src"
+          v-if="youtube_ids.length > 0"
+        ]
+        button[v-on:click="smallVideoSize"] small
+        button[v-on:click="largeVideoSize"] large
