@@ -12,6 +12,9 @@ class String
   end
 end
 
+class NotURLError < StandardError; end
+class NotFoundYoutubeMovie < StandardError; end
+
 helpers do
   YOUTUBE_REG = /((www\.youtube\.com)|(youtu\.be))\/((watch\?v=)|(v\/)|(embed\/)?)([A-Za-z0-9_-]{11})/
 
@@ -32,14 +35,24 @@ get '/' do
 end
 
 get '/youtube_ids.json' do
-  url = params[:url]
-  doc = Nokogiri::HTML(open(url))
+  begin
+    @error_message = nil
 
-  @title = doc.title
-  @youtube_ids = youtube_ids doc
+    url = params[:url]
+    doc = Nokogiri::HTML(open(url))
 
-  # @title = "debug"
-  # @youtube_ids = ["GOP5kIzaWQE","UbkwELpUhmA","pFqs9rwakjc","RiYYYv6VQrA","rMhWhQv7nFc","wpQKLMg-AJk","6is0zT1Qf-0","HMMqJs7WVtY","DHmYC8a_4cI","csisM0fshrU","jFBv-sf8qGs","ypULrLzKRb0","GHG3e0bQe3I","wqtGqIuP8ZE","6zzgBFoBrNo"]
+    @title = doc.title
+    @youtube_ids = youtube_ids doc
+
+    raise NotFoundYoutubeMovie if @youtube_ids.empty?
+
+  rescue OpenURI::HTTPError, SocketError, Errno::ENOENT, NotURLError
+    status 400
+    @error_message = 'This value is incorrect url.'
+  rescue NotFoundYoutubeMovie
+    status 400
+    @error_message = 'Not found YouTube movie from this site.'
+  end
 
   rabl :youtube_ids
 end

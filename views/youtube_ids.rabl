@@ -1,3 +1,8 @@
 object false
-node(:title) { @title }
-node(:youtubeIds) { @youtube_ids }
+
+if @error_message.nil?
+  node(:title) { @title }
+  node(:youtubeIds) { @youtube_ids }
+else
+  node(:errorMessage) { @error_message }
+end

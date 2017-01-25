@@ -1,5 +1,6 @@
 $ = require('jquery')
 Vue = require('vue')
+Toastr = require('toastr')
 
 $ ->
   window.app = new Vue
@@ -31,17 +32,18 @@ $ ->
             720
     methods:
       submit: ->
+        return if @url == undefined || @url.length == 0
         $.ajax
           url: "/youtube_ids.json"
           type: 'GET'
           data:
             url: @url
         .done (response) =>
-          console.log response
           json = JSON.parse response
           @title       = json.title
           @youtubeIds  = json.youtubeIds
         .fail (response) =>
-          console.error response
+          json = JSON.parse response.responseText
+          Toastr.error('', json.errorMessage)
       compressVideoSize: -> @playerSize = 'small'
       expandVideoSize: ->   @playerSize = 'large'
