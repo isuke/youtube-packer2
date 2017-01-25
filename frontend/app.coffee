@@ -7,17 +7,28 @@ $ ->
     data:
       url: undefined
       title: undefined
-      width: 640
-      height: 360
-      youtube_ids: []
+      playerSize: 'small'
+      youtubeIds: []
       options: [
         "autoplay=1",
       ]
     computed:
       src: ->
-        head = @youtube_ids[0]
-        tail = @youtube_ids.slice(1)
+        head = @youtubeIds[0]
+        tail = @youtubeIds.slice(1)
         "https://www.youtube.com/embed/#{head}?playlist=#{tail.join(',')}&#{@options.join('&')}"
+      playerWidth: ->
+        switch @playerSize
+          when 'small'
+            640
+          when 'large'
+            1280
+      playerHeight: ->
+        switch @playerSize
+          when 'small'
+            360
+          when 'large'
+            720
     methods:
       submit: ->
         $.ajax
@@ -29,12 +40,8 @@ $ ->
           console.log response
           json = JSON.parse response
           @title       = json.title
-          @youtube_ids = json.youtube_ids
+          @youtubeIds  = json.youtubeIds
         .fail (response) =>
           console.error response
-      smallVideoSize: ->
-        @width = 640
-        @height = 360
-      largeVideoSize: ->
-        @width = 1280
-        @height = 720
+      compressVideoSize: -> @playerSize = 'small'
+      expandVideoSize: ->   @playerSize = 'large'

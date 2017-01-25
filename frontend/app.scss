@@ -1,0 +1,26 @@
+.app {
+  display: flex;
+  justify-content: center;
+
+  .main {
+    flex-basis: 640px;
+    padding-top: 50px;
+    text-align: center;
+
+    &__description {
+      font-size: small;
+    }
+
+    &__search {
+      display: flex;
+
+      &__url {
+        flex: 1;
+      }
+      &__submit {
+        width: 100px;
+        margin: 0;
+      }
+    }
+  }
+}
