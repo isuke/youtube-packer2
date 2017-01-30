@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "autoprefixer": "^6.7.1",
     "coffee-loader": "^0.7.2",
     "coffee-script": "^1.12.2",
     "css-loader": "^0.26.1",
@@ -10,6 +11,7 @@
     "less": "^2.7.2",
     "node-sass": "^4.3.0",
     "picnic": "^6.3.2",
+    "postcss-loader": "^1.2.2",
     "sass-loader": "^4.1.1",
     "style-loader": "^0.13.1",
     "toastr": "^2.1.2",

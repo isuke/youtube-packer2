@@ -7,7 +7,7 @@ module.exports = {
   module: {
     loaders: [
       { test: /\.css$/, loader: "style!css" },
-      { test: /\.scss$/, loader:  "style!css!sass" },
+      { test: /\.scss$/, loader:  "style!css!postcss!sass" },
       { test: /\.coffee$/, loader: "coffee" },
       { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url?limit=10000&mimetype=application/font-woff" },
       { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file" }
@@ -18,5 +18,8 @@ module.exports = {
     alias: {
       'vue$': 'vue/dist/vue.common.js'
     }
+  },
+  postcss: function() {
+    return [require('autoprefixer')];
   }
 };
