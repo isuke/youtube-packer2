@@ -2,30 +2,7 @@ doctype html
 html
   head
     title YoutubePacker2
-    script[type="text/javascript" src="bundle.js" charset="utf-8"]
   body
     #app.app
-      .main
-        h3.main__title YoutubePacker2
-        .main__description
-          p Extract YouTube movies from URL, And pack these to a playlist.
-          p Enter URL that you want to make playlist.
-        .main__search
-          input.main__search__url[type="url" v-model="url" placeholder="http://..."]
-          button.main__search__submit[v-on:click="submit"] submit
-
-        .main__video
-          h1.main__video__title[v-text="title"]
-          iframe.main__video__player[
-            type="text/html"
-            frameborder="0"
-            :width="playerWidth"
-            :height="playerHeight"
-            :src="src"
-            v-if="youtubeIds.length > 0"
-          ]
-          .main__video__buttons
-            button.main__video__buttons__compress_btn[v-if="playerSize === 'large'" v-on:click="compressVideoSize"]
-              i.fa.fa-compress
-            button.main__video__buttons__expand_btn[v-if="playerSize === 'small'" v-on:click="expandVideoSize"]
-              i.fa.fa-expand
+      front
+    script(type="text/javascript" src="bundle.js" charset="utf-8")

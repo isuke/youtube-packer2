@@ -1,5 +1,5 @@
 module.exports = {
-  entry: './frontend/main.js',
+  entry: './frontend/app.js',
   output: {
     path: 'public',
     filename: 'bundle.js'
@@ -10,8 +10,14 @@ module.exports = {
       { test: /\.scss$/, loader:  "style!css!postcss!sass" },
       { test: /\.coffee$/, loader: "coffee" },
       { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url?limit=10000&mimetype=application/font-woff" },
-      { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file" }
+      { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file" },
+      { test: /\.vue$/, loader: "vue" }
     ]
+  },
+  vue: {
+    loaders: {
+      scss: 'vue-style!css!sass'
+    }
   },
   resolve: {
     extenstions: ['', '.js', '.json', '.html'],
