@@ -1,17 +1,18 @@
 <script lang="coffee">
-Front = require('./front.vue')
-
 new Vue(
   el: '#app'
-  components: { Front }
+  components:
+    front: require('./front.vue')
+    side:  require('./side.vue')
 )
 </script>
 
 <style lang="scss">
 .app {
   display: flex;
-  justify-content: center;
+  align-items: stretch;
 
-  .front { flex-basis: 640px; }
+  .front { flex: 1; }
+  .side  { width: 250px; }
 }
 </style>
