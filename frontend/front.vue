@@ -6,11 +6,11 @@
       p Extract YouTube movies from URL, And pack these to a playlist.
       p Enter URL that you want to make playlist.
     .front__search
-      input.front__search__url(type="url" v-model="url" placeholder="http://...")
+      input.front__search__url(type="url" v-model="inputUrl" placeholder="http://...")
       button.front__search__submit(v-on:click="submit") submit
 
     .front__video
-      h1.front__video__title(v-text="title")
+      h2: a.front__video__title(v-bind:href="url" target="_blank" v-text="title")
       iframe.front__video__player(
         type="text/html"
         frameborder="0"
@@ -34,6 +34,7 @@ bus = require('./bus.coffee')
 
 module.exports = {
   data: ->
+    inputUrl: undefined
     url: undefined
     title: undefined
     playerSize: 'small'
@@ -60,12 +61,12 @@ module.exports = {
           720
   methods:
     submit: ->
-      return if @url == undefined || @url.length == 0
+      return if @inputUrl == undefined || @inputUrl.length == 0
       $.ajax
         url: "/youtube_ids.json"
         type: 'GET'
         data:
-          url: @url
+          url: @inputUrl
       .done (response) =>
         json = JSON.parse response
         @_setPlaylist(json)
@@ -77,6 +78,7 @@ module.exports = {
     expandVideoSize: ->   @playerSize = 'large'
     toggleMenu: -> bus.$emit 'toggleMenuEvent'
     _setPlaylist: (json) ->
+      @url         = json.url
       @title       = json.title
       @youtubeIds  = json.youtubeIds
     _storePlaylist: (json) ->

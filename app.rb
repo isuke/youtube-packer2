@@ -38,8 +38,8 @@ get '/youtube_ids.json' do
   begin
     @error_message = nil
 
-    url = params[:url]
-    doc = Nokogiri::HTML(open(url))
+    @url = params[:url]
+    doc = Nokogiri::HTML(open(@url))
 
     @title = doc.title
     @youtube_ids = youtube_ids doc
