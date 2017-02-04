@@ -1,8 +1,10 @@
+var AssetsPlugin = require('assets-webpack-plugin')
+
 module.exports = {
   entry: './frontend/app.js',
   output: {
     path: 'public',
-    filename: 'bundle.js'
+    filename: 'bundle-[hash].js'
   },
   module: {
     loaders: [
@@ -27,5 +29,6 @@ module.exports = {
   },
   postcss: function() {
     return [require('autoprefixer')];
-  }
+  },
+  plugins: [new AssetsPlugin()]
 };

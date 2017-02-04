@@ -3,6 +3,7 @@ require 'sinatra/reloader'
 require 'nokogiri'
 require 'open-uri'
 require 'rabl'
+require 'json'
 
 class String
   URL_REG = /https?:\/\/[\w\/:%#\$&\?\(\)~\.=\+\-]+/
@@ -28,9 +29,17 @@ helpers do
     end
     result
   end
+
+  def script
+    file = File.read("#{settings.root}/webpack-assets.json")
+    json = JSON.parse(file)
+    json['main']['js']
+  end
 end
 
 get '/' do
+  @script = script
+
   slim :app
 end
 
