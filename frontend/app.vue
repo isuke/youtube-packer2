@@ -3,8 +3,8 @@ new Vue(
   el: '#app'
   store: require('./store.coffee')
   components:
-    front: require('./Front.vue')
-    side:  require('./Side.vue')
+    front: require('./front.vue')
+    side:  require('./side.vue')
 )
 </script>
 
